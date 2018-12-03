@@ -1,6 +1,8 @@
 package fr.themode.utils.file;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FileUtils {
 
@@ -51,6 +53,21 @@ public class FileUtils {
             e.printStackTrace();
         }
         return value;
+    }
+
+    public static List<File> getFiles(String path) {
+        List<File> results = new ArrayList<>();
+
+        File[] files = new File(path).listFiles();
+
+        if (files != null)
+            for (File file : files) {
+                if (file.isFile()) {
+                    results.add(file);
+                }
+            }
+
+        return results;
     }
 
 }
