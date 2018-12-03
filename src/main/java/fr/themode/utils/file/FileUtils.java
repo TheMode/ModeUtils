@@ -18,7 +18,7 @@ public class FileUtils {
         return new File(path);
     }
 
-    public static String getInternalFileString(Class clazz, String path) {
+    public static String getInternalFileString(String path) {
         String value = "";
         try {
             String line;
