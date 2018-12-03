@@ -4,7 +4,13 @@ import java.io.*;
 
 public class FileUtils {
 
-    public static InputStream getInternalFile(Class clazz, String path) {
+    private static Class clazz;
+
+    public static void setClass(Class clazz) {
+        FileUtils.clazz = clazz;
+    }
+
+    public static InputStream getInternalFile(String path) {
         return clazz.getResourceAsStream(path);
     }
 
@@ -16,7 +22,7 @@ public class FileUtils {
         String value = "";
         try {
             String line;
-            BufferedReader reader = new BufferedReader(new InputStreamReader(FileUtils.getInternalFile(clazz, path)));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(FileUtils.getInternalFile(path)));
             while ((line = reader.readLine()) != null) {
                 value += line + "\n";
             }
