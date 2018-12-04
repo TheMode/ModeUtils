@@ -13,6 +13,7 @@ public class FileUtils {
     }
 
     public static InputStream getInternalFile(String path) {
+        path = "/" + path;
         return clazz.getResourceAsStream(path);
     }
 
