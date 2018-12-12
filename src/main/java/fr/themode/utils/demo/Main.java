@@ -20,7 +20,9 @@ public class Main {
             timer.reset();
         }, 1000);
 
+        System.out.println("BEFORE");
         timer.start();
+        System.out.println("AFTER");
 
     }
 

@@ -9,41 +9,22 @@ public class Timer {
 
     private CopyOnWriteArrayList<Task> taskList;
 
+    private Thread timerThread;
+
     private int currentTask;
 
     public Timer() {
         this.runnable = new TimerRunnable(this);
         this.taskList = new CopyOnWriteArrayList<>();
+        this.timerThread = new Thread(runnable);
     }
 
     public void start() {
-        this.runnable.run();
+        this.timerThread.start();
     }
 
-    protected void update() {
-        long currentTime = System.currentTimeMillis();
-
-        Iterator<Task> iterator = taskList.iterator();
-        while (iterator.hasNext()) {
-            Task task = iterator.next();
-            if (!task.started) {
-                if (currentTime - task.time >= task.getFirstRun()) {
-                    task.getRunnable().run();
-                    if (task.getScheduleTime() == 0) {
-                        removeTask(task.getID());
-                    } else {
-                        task.time = currentTime;
-                        task.started = true;
-                    }
-                }
-            } else {
-                if (currentTime - task.time > task.getScheduleTime()) {
-                    task.getRunnable().run();
-                    task.time = currentTime;
-                }
-            }
-
-        }
+    public void stop() {
+        this.runnable.stop();
     }
 
     public int addTimerTask(Runnable runnable, int time) {
@@ -95,15 +76,41 @@ public class Timer {
             this.timer = timer;
         }
 
+        @Override
         public void run() {
             while (!exit) {
-                timer.update();
+                update();
             }
-
         }
 
         public void stop() {
             exit = true;
+        }
+
+        private void update() {
+            long currentTime = System.currentTimeMillis();
+
+            Iterator<Task> iterator = taskList.iterator();
+            while (iterator.hasNext()) {
+                Task task = iterator.next();
+                if (!task.started) {
+                    if (currentTime - task.time >= task.getFirstRun()) {
+                        task.getRunnable().run();
+                        if (task.getScheduleTime() == 0) {
+                            removeTask(task.getID());
+                        } else {
+                            task.time = currentTime;
+                            task.started = true;
+                        }
+                    }
+                } else {
+                    if (currentTime - task.time > task.getScheduleTime()) {
+                        task.getRunnable().run();
+                        task.time = currentTime;
+                    }
+                }
+
+            }
         }
 
     }
