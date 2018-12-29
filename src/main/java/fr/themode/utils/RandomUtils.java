@@ -24,7 +24,7 @@ public class RandomUtils {
         return value >= getRandomFloat(min, max);
     }
 
-    public String randomString(String characters, int length) {
+    public static String randomString(String characters, int length) {
 
         StringBuilder sb = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
@@ -34,7 +34,7 @@ public class RandomUtils {
         return sb.toString();
     }
 
-    public String randomString(int length) {
+    public static String randomString(int length) {
         return randomString("ABCDEFGHIJKLMNOPQRSTUVWXYZ", length);
     }
 
