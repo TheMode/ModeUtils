@@ -31,6 +31,10 @@ public class MathUtils {
         return (float) Math.round(value * scale) / scale;
     }
 
+    public static float lerp(float point1, float point2, float alpha) {
+        return point1 + alpha * (point2 - point1);
+    }
+
     public static AngleValue getMoveValue(double angle, float x, float y, float xSpeed, float ySpeed) {
         x = (float) Math.cos(Math.toRadians(angle)) * xSpeed;
         y = (float) Math.sin(Math.toRadians(angle)) * ySpeed;
