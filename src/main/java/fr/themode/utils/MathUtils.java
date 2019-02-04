@@ -2,6 +2,10 @@ package fr.themode.utils;
 
 public class MathUtils {
 
+    public static boolean isNumber(String str) {
+        return str.matches("-?\\d+(\\.\\d+)?");
+    }
+
     public static long minMax(long value, long min, long max) {
         return value < min ? min : value > max ? max : value;
     }
@@ -29,6 +33,10 @@ public class MathUtils {
     public static float round(double value, int precision) {
         int scale = (int) Math.pow(10, precision);
         return (float) Math.round(value * scale) / scale;
+    }
+
+    public static boolean between(int number, int min, int max) {
+        return (number >= min && number <= max);
     }
 
     public static float lerp(float point1, float point2, float alpha) {
