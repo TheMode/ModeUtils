@@ -71,4 +71,7 @@ public class FileUtils {
         return results;
     }
 
+    public static Class getResourceClass() {
+        return clazz;
+    }
 }
