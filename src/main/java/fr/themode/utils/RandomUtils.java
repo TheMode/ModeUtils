@@ -16,12 +16,9 @@ public class RandomUtils {
         return ThreadLocalRandom.current().nextFloat() * (max - min) + min;
     }
 
-    public static boolean chance(int min, int max, int value) {
-        return value >= getRandomInteger(min, max);
-    }
-
-    public static boolean chance(float min, float max, float value) {
-        return value >= getRandomFloat(min, max);
+    public static boolean chance(float value) {
+        value = MathUtils.minMax(value, 0, 1);
+        return value >= getRandomFloat(0, 1);
     }
 
     public static String randomString(String characters, int length) {
