@@ -71,7 +71,7 @@ public class FileUtils {
         return results;
     }
 
-    private static InputStream toInputStream(File file) {
+    public static InputStream toInputStream(File file) {
         try {
             return new FileInputStream(file);
         } catch (FileNotFoundException e) {
