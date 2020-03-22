@@ -71,6 +71,15 @@ public class FileUtils {
         return results;
     }
 
+    private static InputStream toInputStream(File file) {
+        try {
+            return new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            System.err.println("File " + file.getPath() + " do not exist.");
+            return null;
+        }
+    }
+
     public static Class getResourceClass() {
         return clazz;
     }
